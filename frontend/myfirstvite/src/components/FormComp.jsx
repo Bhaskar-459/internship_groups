@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Button, Col, Form, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FormComp.css';
@@ -11,6 +11,31 @@ function FormComp() {
   const [Sclass, setSClass] = useState('');
   const [internship, setInternship] = useState('');
   const [year, setYear] = useState('');
+
+  const internshipOptions = [
+    'AWS Data Analytics VIRTUAL INTERNSHIP PROGRAM',
+    'AWS cloud Virtual internship',
+    'AWS AI &ML Virtual internship',
+    'LINUX AUTOMATION VIRTUAL INTERNSHIP PROGRAM',
+    'BluePrism ROBOTIC PROCESS AUTOMATION',
+    'Juniper Networking Cloud Virtual Internship',
+    'Alteryx Data Analytics Process Automation Virtual Internship',
+    'Juniper Networking Virtual Internship',
+    'Celonis Process Mining Virtual Internship',
+    'Embedded system developer Virtuval Internship',
+    'Network security virtual Internship (Fortinet)',
+    'CYBERSECURITY VIRTUAL INTERNSHIP PROGRAM',
+    'ROBOTIC PROCESS AUTOMATION (Ulpath) VIRTUAL INTERNSHIP',
+    'ANDROID DEVELOPER VIRTUAL INTERNSHIP',
+    'ZERO TRUST CLOUD SECURITY VIRTUAL INTERNSHIP',
+    'Altair Conceptual Cae Design And Simulation Virtual Internship',
+    'Altair Data Science Master Virtual Internship',
+    'Aws Data Engineering Virtual Internship',
+    'Bentley Water Resource Management Virtual Internship',
+    'Bentley Structural Analysis With Staad. Pro Virtual Internship',
+    'Celonis Business Analyst Virtual Internship',
+    'Google Ai-MI Virtual Internship'
+  ];
 
   const postStudentData = async () => {
     console.log("base",base_url)
@@ -102,9 +127,9 @@ function FormComp() {
             onChange={(e) => setInternship(e.target.value)}
           >
             <option value="">Select Internship</option>
-            <option value="Internship1">Internship 1</option>
-            <option value="Internship2">Internship 2</option>
-            <option value="Internship3">Internship 3</option>
+            {internshipOptions.map((option, index) => (
+              <option key={index} value={option}>{option}</option>
+            ))}
           </Form.Control>
           <Form.Control.Feedback type="invalid">
             Please Select an Internship.

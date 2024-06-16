@@ -22,6 +22,10 @@ function CardComp({ group }) {
       alert('Please login to join a group');
       return;
     }
+    if(group.users.length === 4){
+      alert('Group is full');
+      return;
+    }
 
     try {
       const response = await fetch(`${base_url}/post/group/join/${group._id}`, {
