@@ -1,0 +1,14 @@
+.groups-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px; /* Adjust the spacing between the items as needed */
+    justify-content: flex-start;
+    padding: 16px; /* Optional: Add some padding around the container */
+  }
+  
+  .group-item {
+    flex: 1 1 calc(25% - 16px); /* Adjust the width of each item as needed */
+    box-sizing: border-box;
+    margin-bottom: 16px; /* Add some space at the bottom if needed */
+  }
+  
