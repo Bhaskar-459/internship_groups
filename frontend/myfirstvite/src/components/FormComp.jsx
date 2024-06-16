@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Container, Button, Col, Form, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './FormComp.css';
+const base_url = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
 function FormComp() {
   const [validated, setValidated] = useState(false);
@@ -12,7 +13,8 @@ function FormComp() {
   const [year, setYear] = useState('');
 
   const postStudentData = async () => {
-    const response = await fetch('http://localhost:5000/post/student', {
+    console.log("base",base_url)
+    const response = await fetch(`${base_url}/post/student`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

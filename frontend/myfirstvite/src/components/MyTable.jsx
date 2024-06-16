@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+const base_url = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
 const MyTable = () => {
   const [data, setData] = useState([]);
@@ -9,7 +10,7 @@ const MyTable = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/get/students');
+      const response = await fetch(`http://localhost:5000/get/students`);
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }

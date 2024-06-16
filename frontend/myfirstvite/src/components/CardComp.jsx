@@ -1,6 +1,11 @@
 import React from 'react';
 import { Button, Card, ListGroup } from 'react-bootstrap';
 
+
+
+
+const base_url = import.meta.env.VITE_REACT_APP_API_BASE_URL;
+
 function CardComp({ group }) {
   const localGroup = localStorage.getItem('group_id');
 
@@ -19,7 +24,7 @@ function CardComp({ group }) {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/post/group/join/${group._id}`, {
+      const response = await fetch(`${base_url}/post/group/join/${group._id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId })
@@ -55,7 +60,7 @@ function CardComp({ group }) {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/delete/group/leave/${group._id}`, {
+      const response = await fetch(`${base_url}/delete/group/leave/${group._id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId })
