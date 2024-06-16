@@ -12,7 +12,7 @@ function FormComp() {
   const [year, setYear] = useState('');
 
   const postStudentData = async () => {
-    const response = await fetch('http://localhost:5000/student', {
+    const response = await fetch('http://localhost:5000/post/student', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

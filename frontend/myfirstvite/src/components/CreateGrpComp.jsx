@@ -17,7 +17,7 @@ const CreateGrpComp = () => {
         }
     
         try {
-          const response = await fetch(`http://localhost:5000/group`, {
+          const response = await fetch(`http://localhost:5000/post/group`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

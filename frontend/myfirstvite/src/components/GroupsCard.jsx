@@ -8,7 +8,7 @@ const Groups = () => {
   // fetch data from the server
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/groups');
+      const response = await fetch('http://localhost:5000/get/groups');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
