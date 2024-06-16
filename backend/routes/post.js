@@ -11,7 +11,8 @@ router.post('/student', async (req, res) => {
       await newUser.save();
       res.status(201).json(newUser);
     } catch (error) {
-      next(error);
+      console.log(error);
+      res.status(500).json({ message: 'Something went wrong' });
     }
   });
 
@@ -25,7 +26,8 @@ router.post('/student', async (req, res) => {
       await user.save();
       res.status(201).json(newGroup);
     } catch (error) {
-      next(error);
+      console.log(error);
+      res.status(500).json({ message: 'Something went wrong' });
     }
   });
 
@@ -41,7 +43,8 @@ router.post('/student', async (req, res) => {
       await group.save();
       res.status(200).json(group);
     } catch (error) {
-      next(error);
+      console.log(error);
+      res.status(500).json({ message: 'Something went wrong' });
     }
   });
 

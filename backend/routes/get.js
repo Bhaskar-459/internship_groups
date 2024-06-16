@@ -9,7 +9,8 @@ router.get('/groups', async (req, res) => {
       const groups = await Group.find().populate('users');
       res.status(200).json(groups);
     } catch (error) {
-      next(error);
+      console.log(error);
+      res.status(500).json({ message: 'Something went wrong' });
     }
   });
 
@@ -19,7 +20,8 @@ router.get('/groups', async (req, res) => {
       const group = await Group.findById(id).populate('users');
       res.status(200).json(group);
     } catch (error) {
-      next(error);
+      console.log(error);
+      res.status(500).json({ message: 'Something went wrong' });
     }
   });
 
@@ -29,16 +31,22 @@ router.get('/groups', async (req, res) => {
       const user = await User.findById(id);
       res.status(200).json(user);
     } catch (error) {
-      next(error);
+      console.log(error);
+      res.status(500).json({ message: 'Something went wrong' });
     }
   });
 
   router.get('/students', async (req, res) => {
     try {
       const users = await User.find().sort({ rollNumber: 1 });
+      if (!users) {
+        res.status(404).json({ message: 'No students found' });
+        return;
+      }
       res.status(200).json(users);
     } catch (error) {
-      next(error);
+      console.log(error);
+      res.status(500).json({ message: 'Something went wrong' });
     }
   });
 
