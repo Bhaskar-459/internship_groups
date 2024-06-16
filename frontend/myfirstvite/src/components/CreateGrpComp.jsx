@@ -35,6 +35,8 @@ const CreateGrpComp = () => {
           const data = await response.json();
           console.log(data,"came_here");
           localStorage.setItem('group_id', data._id); // Use data.id instead of data._id
+          alert('Successfully created the group!');
+          window.location.reload();
         } catch (error) {
           console.error("There was a problem with the fetch operation:", error);
         }

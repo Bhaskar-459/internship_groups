@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import connect from './Database/MongoConnect.js';
 import getRoutes from './routes/get.js';
 import postRoutes from './routes/post.js';
+import deleteRoutes from './routes/delete.js';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(cors());
 // Routes
 app.use('/get', getRoutes);
 app.use('/post', postRoutes);
+app.use('/delete', deleteRoutes);
 
 
 // Error handling middleware

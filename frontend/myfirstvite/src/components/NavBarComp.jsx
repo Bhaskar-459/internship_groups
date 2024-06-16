@@ -7,10 +7,9 @@ const NavBarComp = () => {
   return (
     <Navbar bg="primary" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">Internship Groups</Navbar.Brand>
+          <Navbar.Brand to="/">Internship Groups</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">View All</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
