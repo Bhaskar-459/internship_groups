@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 function CardComp({ group }) {
+  let localGroup = localStorage.getItem('group_id');
   console.log(group.users,"users s ahahs");
   const Join_Group = async () => {
     let localGroup = localStorage.getItem('group_id');
@@ -41,6 +42,50 @@ function CardComp({ group }) {
 
       // Display a success message to the user
       alert('Successfully joined the group!');
+      window.location.reload();
+      
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  }
+
+  const Leave_Group = async () => {
+    
+    if (!localGroup) {
+      alert('You are not in a group!');
+      return;
+    }
+    console.log("Leaving group:", group._id);
+    let group_id = group._id;
+    let user_id = localStorage.getItem('user_id');
+    localStorage.removeItem('group_id');
+    
+    if (!user_id) {
+      alert('Please login to leave a group');
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:5000/delete/group/leave/${group_id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user_id
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+      // Display a success message to the user
+      alert('Successfully left the group!');
+      window.location.reload();
       
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
@@ -65,6 +110,9 @@ function CardComp({ group }) {
       </ListGroup>
       <Card.Body>
         <Button variant="primary" onClick={Join_Group}>Join Group</Button>
+         {/* display the Leave Group button only if the user is in that particular group */}
+        {localGroup === group._id && (
+          <Button variant="danger" onClick={Leave_Group}>Leave Group</Button>)}
       </Card.Body>
     </Card>
   );

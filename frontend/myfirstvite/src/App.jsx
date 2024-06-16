@@ -5,6 +5,9 @@ import FormComp from "./components/FormComp";
 import Groups from "./components/GroupsCard";
 import UserDataCard from "./components/UserDataCard";
 import CreateGrpComp from "./components/CreateGrpComp";
+import TableComp from "./components/Table";
+
+;
 
 function App() {
   const [Login, setLogin] = useState(false);
@@ -25,6 +28,7 @@ function App() {
       {grouped ? null : Login ? <CreateGrpComp /> : null}
       <Groups />
       {Login ? <UserDataCard /> : <FormComp />}
+      <TableComp />
     </>
   );
 }

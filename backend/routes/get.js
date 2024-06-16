@@ -33,4 +33,13 @@ router.get('/groups', async (req, res) => {
     }
   });
 
+  router.get('/students', async (req, res) => {
+    try {
+      const users = await User.find().sort({ rollNumber: 1 });
+      res.status(200).json(users);
+    } catch (error) {
+      next(error);
+    }
+  });
+
     export default router;
