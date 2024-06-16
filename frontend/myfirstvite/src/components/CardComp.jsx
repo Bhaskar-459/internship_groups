@@ -1,36 +1,28 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
+import { Button, Card, ListGroup } from 'react-bootstrap';
 
 function CardComp({ group }) {
-  let localGroup = localStorage.getItem('group_id');
-  console.log(group.users,"users s ahahs");
+  const localGroup = localStorage.getItem('group_id');
+
   const Join_Group = async () => {
-    let localGroup = localStorage.getItem('group_id');
-    if (localGroup) {
+    const storedGroupId = localStorage.getItem('group_id');
+    const userId = localStorage.getItem('user_id');
+
+    if (storedGroupId) {
       alert('You are already in a group!');
       return;
     }
-    console.log("Joining group:", group._id);
-    let group_id = group._id;
-    let user_id = localStorage.getItem('user_id');
-    localStorage.setItem('group_id', group_id);
-    
-    if (!user_id) {
+
+    if (!userId) {
       alert('Please login to join a group');
       return;
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/post/group/join/${group_id}`, {
+      const response = await fetch(`http://localhost:5000/post/group/join/${group._id}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId: user_id
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId })
       });
 
       if (!response.ok) {
@@ -40,40 +32,33 @@ function CardComp({ group }) {
       const data = await response.json();
       console.log(data);
 
-      // Display a success message to the user
       alert('Successfully joined the group!');
+      localStorage.setItem('group_id', group._id);
       window.location.reload();
       
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
-  }
+  };
 
   const Leave_Group = async () => {
-    
+    const userId = localStorage.getItem('user_id');
+
     if (!localGroup) {
       alert('You are not in a group!');
       return;
     }
-    console.log("Leaving group:", group._id);
-    let group_id = group._id;
-    let user_id = localStorage.getItem('user_id');
-    localStorage.removeItem('group_id');
-    
-    if (!user_id) {
+
+    if (!userId) {
       alert('Please login to leave a group');
       return;
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/delete/group/leave/${group_id}`, {
+      const response = await fetch(`http://localhost:5000/delete/group/leave/${group._id}`, {
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId: user_id
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId })
       });
 
       if (!response.ok) {
@@ -83,22 +68,20 @@ function CardComp({ group }) {
       const data = await response.json();
       console.log(data);
 
-      // Display a success message to the user
       alert('Successfully left the group!');
+      localStorage.removeItem('group_id');
       window.location.reload();
       
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
-  }
+  };
 
   return (
     <Card style={{ width: '18rem', margin: '10px' }}>
       <Card.Header>{group.title}</Card.Header>
       <ListGroup variant="flush">
-        {group.users.map((user) => (
-          // Display the user details here
-          // Example: {user.name} - {user.rollNumber} - {user.internship} - {user.Sclass
+        {group.users.map(user => (
           <ListGroup.Item key={user._id}>
             Name: {user.name} <br />
             Roll Number: {user.rollNumber} <br />
@@ -110,9 +93,9 @@ function CardComp({ group }) {
       </ListGroup>
       <Card.Body>
         <Button variant="primary" onClick={Join_Group}>Join Group</Button>
-         {/* display the Leave Group button only if the user is in that particular group */}
         {localGroup === group._id && (
-          <Button variant="danger" onClick={Leave_Group}>Leave Group</Button>)}
+          <Button variant="danger" onClick={Leave_Group} style={{ marginLeft: '10px' }}>Leave Group</Button>
+        )}
       </Card.Body>
     </Card>
   );
