@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+const base_url = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
 const CreateGrpComp = () => {
     const [title, setTitle] = useState('');
+
 
     const create_group = async () => {
         let Grouptitle = title;
@@ -17,7 +19,7 @@ const CreateGrpComp = () => {
         }
     
         try {
-          const response = await fetch(`http://localhost:5000/post/group`, {
+          const response = await fetch(`${base_url}/post/group`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

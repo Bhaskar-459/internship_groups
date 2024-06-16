@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CardComp from './CardComp';
 import './Groups.css';
+const base_url = import.meta.env.VITE_REACT_APP_API_BASE_URL;
 
 const Groups = () => {
   const [groups, setGroups] = useState([]);
@@ -8,7 +9,7 @@ const Groups = () => {
   // fetch data from the server
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/get/groups');
+      const response = await fetch(`${base_url}/get/groups`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
