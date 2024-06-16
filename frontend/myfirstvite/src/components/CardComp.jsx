@@ -22,7 +22,7 @@ function CardComp({ group }) {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/group/join/${group_id}`, {
+      const response = await fetch(`http://localhost:5000/post/group/join/${group_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
